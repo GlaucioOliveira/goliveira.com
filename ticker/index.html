@@ -1,0 +1,103 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<title>Crypto Ticker - G. Oliveira</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/main.css" crossorigin="anonymous">
+</head>
+<body>
+    <div class="sticky-top">
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="index.html"><i class="fab fa-bitcoin"></i> Crypto Ticker</a>        
+      <!-- <form class="form-inline">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Buscar</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Moto/Modelo/Peça" aria-label="Moto/Modelo/Peça" aria-describedby="button-addon1">
+        </div>
+      </form>        -->
+    </nav>
+  </div>
+<br/>
+     <div class="container">       
+       <h3>Crypto Ticker</h3>	   
+       <div id="app" v-cloak> <!-- Vue.JS App -->		
+		<div class="card-deck p-3" v-for="deck in decks">
+			<div class="card" v-for="coin in ticker.slice(deck.start, deck.end)">
+			  <div class="card-header text-white bg-secondary">
+				{{ coin.name }}
+			  </div>
+			  <ul class="list-group list-group-flush">
+				<li class="list-group-item">{{ coin.data.high }}<span class="badge badge-secondary float-right">High</span></li>
+				<li class="list-group-item">{{ coin.data.low }}<span class="badge badge-secondary float-right">Low</span></li>
+				<li class="list-group-item">{{ coin.data.last }}<span class="badge badge-secondary float-right">Last</span></li>
+				<li class="list-group-item">{{ coin.data.buy }}<span class="badge badge-secondary float-right">Buy</span></li>
+				<li class="list-group-item">{{ coin.data.sell }}<span class="badge badge-secondary float-right">Sell</span></li>
+			  </ul>
+			  <div class="card-footer">
+				<small class="text-muted">Updated by @admin</small>
+			  </div>            
+			</div>   
+		  </div> 
+		 </div>
+       </div>
+  </div>
+<br/>
+
+<!-- <script>
+	var coinsAmount = 10317.977346;
+	var moneyInvested = 11095.71;
+	var lastETHValue = 0.0;
+
+    function getCoinPrice(){
+    	$.getJSON("https://www.mercadobitcoin.net/api/XRP/ticker/", function(result){
+    		var coin = result.ticker;
+        	var ETHValue = (coin.sell * coinsAmount);
+            document.title = 'XRP Coin ' + coin.sell + ' - ' + ETHValue;
+            lastETHValue = ETHValue;
+			
+			var sellPriceWithWithdraw = (ETHValue) - 4.90 - (ETHValue * 0.0099);
+			
+            $("#result").html('<strong>Invested:</strong>' + moneyInvested + '<br/>'
+            				+ '<strong>Withdraw:</strong> ' + sellPriceWithWithdraw + '<br/>'
+							+ '<strong>Conversion:</strong> ' + ETHValue + '<br/>'
+            				+ '<strong>Coins:</strong> ' + coinsAmount + '<br/>'
+            				+ '<strong>High:</strong> ' + coin.high + '<br/>'
+            				+ '<strong>Low:</strong> ' + coin.low + '<br/>'
+							+ '<strong>Last:</strong> ' + coin.last + '<br/>'
+							+ '<strong>Sell:</strong> ' + coin.sell + '<br/>'
+							+ '<strong>Buy:</strong> ' + coin.buy + '<br/>'	
+							+ '<div style="clear"></div><br><strong>Last Update:</strong> ' + Date() + '<br/><br/>'	
+							+ '<strong>Curr R$:</strong> ' + ETHValue + ' <br/><br/>'											
+							+ '<strong>Earned R$:</strong> ' + (ETHValue - 1000.82) + ' <br/>'
+            	);
+        });
+    }
+
+	$(document).ready(function(){
+	    $("button").click(function(){
+	        getCoinPrice();
+	    });
+
+	    getCoinPrice(); 
+
+	    setInterval(getCoinPrice, 5000); 
+	});
+</script> -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/main.js"></script>
+	<script src="js/index.vue.js"></script>
+	
+</body>
+</html>
