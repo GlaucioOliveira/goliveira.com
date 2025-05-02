@@ -1,0 +1,131 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        text-align: center;
+        background: #F8BBD0; /* Soft pink for a complementary contrast */
+        font-family: sans-serif;
+        font-weight: 100;
+        color: #4A274F; /* Deep purple for better readability */
+      }
+      
+      h1 {
+        color: #2E003E; /* Dark violet for strong contrast */
+        font-weight: 600;
+        font-size: 40px;
+        margin: 40px 0px 20px;
+      }
+      
+      #clockdiv {
+        font-family: sans-serif;
+        color: #fff;
+        display: inline-block;
+        font-weight: 100;
+        text-align: center;
+        font-size: 30px;
+      }
+      
+      #clockdiv > div {
+        padding: 10px;
+        border-radius: 3px;
+        background: #C8A2C8; /* Lilac */
+        display: inline-block;
+        color: #2E003E; /* Dark violet for contrast */
+      }
+      
+      #clockdiv div > span {
+        padding: 15px;
+        border-radius: 3px;
+        background: #7D3C98; /* Rich purple for contrast */
+        display: inline-block;
+        color: #fff; /* White text for readability */
+      }
+      
+      .smalltext {
+        padding-top: 5px;
+        font-size: 16px;
+        color: #4A274F; /* Deep purple to tie everything together */
+      }
+      </style>
+<title>Birth Counting</title>
+</head>
+<body>
+<h2 style="color:#880E4F"><img src="maisa.png" ><br/>Maisa</h2>
+<div id="clockdiv">
+  <div>
+    <span class="days"></span>
+    <div class="smalltext">Dias</div>
+  </div>
+  <div>
+    <span class="hours"></span>
+    <div class="smalltext">Horas</div>
+  </div>
+  <div>
+    <span class="minutes"></span>
+    <div class="smalltext">Minutos</div>
+  </div>
+  <div style="display:none;">
+    <span class="seconds"></span>
+    <div class="smalltext">Segundos</div>
+  </div>
+  
+  <div id="resumo" style="margin-top:10px;display:block;text-align:left;font-size:18px;">
+  
+  </div>
+</div>
+
+<script>
+function getTimeRemaining(endtime) {
+
+//var countDownDate = new Date("Nov 15, 2018 10:00:00").getTime();
+  var t = Date.parse(new Date()) - Date.parse(endtime);
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  var weeks = Math.floor(days / 7);
+  var months = days / 30;
+  
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds,
+	'weeks': weeks,
+	'months': months
+  };
+}
+
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+	
+	document.getElementById('resumo').innerHTML = "Semanas: <strong style='float:right'>" + (t.weeks) + "</strong><br/>Meses: <strong style='float:right'>" + (t.months.toFixed(1)) + " </strong><br/>";
+	
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+
+var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+initializeClock('clockdiv', 'May 22, 2025 15:26:00');
+</script>
+</body>
