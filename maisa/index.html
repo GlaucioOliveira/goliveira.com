@@ -49,7 +49,7 @@
         color: #4A274F; /* Deep purple to tie everything together */
       }
       </style>
-<title>Birth Counting</title>
+<title>Maisa Oliveira - Birth Counting</title>
 </head>
 <body>
 <h2 style="color:#880E4F"><img src="maisa.png" ><br/>Maisa</h2>
@@ -110,11 +110,11 @@ function initializeClock(id, endtime) {
     var t = getTimeRemaining(endtime);
 
     daysSpan.innerHTML = t.days;
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+    hoursSpan.innerHTML = Math.abs(('0' + t.hours).slice(-2));
+    minutesSpan.innerHTML = Math.abs(('0' + t.minutes).slice(-2));
+    secondsSpan.innerHTML = Math.abs(('0' + t.seconds).slice(-2));
 	
-	document.getElementById('resumo').innerHTML = "Semanas: <strong style='float:right'>" + (t.weeks) + "</strong><br/>Meses: <strong style='float:right'>" + (t.months.toFixed(1)) + " </strong><br/>";
+	document.getElementById('resumo').innerHTML = "Semanas: <strong style='float:right'>" + Math.abs(t.weeks) + "</strong><br/>Meses: <strong style='float:right'>" + Math.abs(t.months.toFixed(1)) + " </strong><br/>";
 	
     if (t.total <= 0) {
       clearInterval(timeinterval);
